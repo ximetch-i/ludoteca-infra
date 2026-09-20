@@ -1,0 +1,51 @@
+services:
+  catalogo:
+    image: r006kj/catalogo-juegos:latest
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - DB_HOST=172.31.27.188
+      - DB_USER=catalogo_user
+      - DB_PASSWORD=catalogo_pass
+      - DB_NAME=catalogo_db
+
+  partidas:
+    image: luisenriquenieva/partidas-jugadas:latest
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    environment:
+      - DB_HOST=172.31.27.188
+      - DB_PORT=5432
+      - DB_NAME=partidas_db
+      - DB_USER=partidas_user
+      - DB_PASSWORD=partidas_pass
+      - CATALOGO_URL=http://catalogo:8001
+
+  membresias:
+    image: ximenagg7/membresias-reservas:latest
+    restart: unless-stopped
+    ports:
+      - "8003:8003"
+    environment:
+      - MONGO_URI=mongodb://172.31.27.188:27017
+      - MONGO_DB_NAME=ludoteca_membresias
+
+  agregador:
+    image: luisenriquenieva/perfil-jugador:fix
+    restart: unless-stopped
+    ports:
+      - "8004:8004"
+    environment:
+      - CATALOGO_URL=http://catalogo:8001
+      - PARTIDAS_URL=http://partidas:8002
+      - MEMBRESIAS_URL=http://membresias:8003
+
+  analitico:
+    image: ximenagg7/microservicio5:v1
+    restart: unless-stopped
+    ports:
+      - "8005:8005"
+    environment:
+      - AWS_REGION=us-east-1
