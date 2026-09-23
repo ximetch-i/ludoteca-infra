@@ -11,7 +11,7 @@ services:
       - DB_NAME=catalogo_db
 
   partidas:
-    image: luisenriquenieva/partidas-jugadas:v3
+    image: luisenriquenieva/partidas-jugadas:v4
     restart: unless-stopped
     ports:
       - "8002:8002"
