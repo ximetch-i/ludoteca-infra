@@ -33,7 +33,7 @@ services:
       - MONGO_DB_NAME=ludoteca_membresias
 
   agregador:
-    image: luisenriquenieva/perfil-jugador:v3
+    image: luisenriquenieva/perfil-jugador:v4
     restart: unless-stopped
     ports:
       - "8004:8004"
