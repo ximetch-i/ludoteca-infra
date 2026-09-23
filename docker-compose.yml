@@ -11,7 +11,7 @@ services:
       - DB_NAME=catalogo_db
 
   partidas:
-    image: luisenriquenieva/partidas-jugadas:v2
+    image: luisenriquenieva/partidas-jugadas:v3
     restart: unless-stopped
     ports:
       - "8002:8002"
@@ -33,7 +33,7 @@ services:
       - MONGO_DB_NAME=ludoteca_membresias
 
   agregador:
-    image: luisenriquenieva/perfil-jugador:v2
+    image: luisenriquenieva/perfil-jugador:v3
     restart: unless-stopped
     ports:
       - "8004:8004"
